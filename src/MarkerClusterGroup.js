@@ -713,8 +713,10 @@ export var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 	},
 
 	_moveChild: function (layer, from, to) {
-		layer._latlng = from;
-		this.removeLayer(layer);
+		if (from) {
+			layer._latlng = from;
+			this.removeLayer(layer);
+		}
 
 		layer._latlng = to;
 		this.addLayer(layer);
@@ -725,7 +727,7 @@ export var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 		delete e.target.__dragStart;
 		if (dragStart) {
 			this._moveChild(e.target, dragStart, e.target._latlng);
-		}		
+		}
 	},
 
 
